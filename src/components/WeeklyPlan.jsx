@@ -7,9 +7,11 @@ class WeeklyPlan extends Component {
     return (
       <div>
         <h2>Weekly plan</h2>
-        {this.props.selected.map((selected) => (
-          <RecipeCard />
-        ))}
+        <div className="library-container">
+          {this.props.plan.map((plan) => (
+            <RecipeCard key={plan.id} title={plan.title} />
+          ))}
+        </div>
       </div>
     );
   }

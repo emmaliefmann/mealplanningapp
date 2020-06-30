@@ -4,16 +4,20 @@ import RecipeCard from "./RecipeCard";
 class Recipes extends Component {
   render() {
     return (
-      <div>
+      <div className="full-container">
         <h2>Recipe Library</h2>
-        {this.props.recipes.map((recipe) => (
-          <RecipeCard
-            key={recipe.id}
-            title={recipe.title}
-            ingredients={recipe.ingredients}
-            onSelected={this.props.onSelected}
-          />
-        ))}
+        <div className="library-container">
+          {this.props.recipes.map((recipe) => (
+            <RecipeCard
+              key={recipe.id}
+              title={recipe.title}
+              id={recipe.id}
+              ingredients={recipe.ingredients}
+              onSelected={this.props.onSelected}
+              plan={false}
+            />
+          ))}
+        </div>
       </div>
     );
   }
