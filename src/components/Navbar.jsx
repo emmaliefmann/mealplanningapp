@@ -6,7 +6,10 @@ const Navbar = ({ username }) => {
   return (
     <div className="navbar">
       <div className="profile">
-        <img src="" alt="profile pic" />
+        <div className="profile-pic">
+          <img src="https://picsum.photos/100" alt="profile pic" />
+        </div>
+
         <h4>{username}</h4>
         <span></span>
       </div>

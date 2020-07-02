@@ -15,25 +15,37 @@ class App extends Component {
       {
         id: 1,
         title: "Recipe1",
-        ingredients: ["potatoes", "milk", "bread", "cheese"],
+        ingredients: [
+          { value: 100, unit: "grams", ingredient: "apples" },
+          { value: 400, unit: "grams", ingredient: "pasta" },
+        ],
         selected: false,
       },
       {
         id: 2,
         title: "Recipe2",
-        ingredients: ["chocolate", "orange", "cheese"],
+        ingredients: [
+          { value: 90, unit: "grams", ingredient: "courgette" },
+          { value: 5, unit: "grams", ingredient: "carrots" },
+        ],
         selected: false,
       },
       {
         id: 3,
         title: "Recipe3",
-        ingredients: ["carrots", "beef", "cauliflower", "cheese"],
+        ingredients: [
+          { value: 100, unit: "grams", ingredient: "aubergine" },
+          { value: 400, unit: "grams", ingredient: "pasta" },
+          { value: 50, unit: "grams", ingredient: "rice" },
+          { value: 90, unit: "grams", ingredient: "onions" },
+          { value: 5, unit: "grams", ingredient: "turnip" },
+        ],
         selected: false,
       },
       {
         id: 4,
         title: "Recipe4",
-        ingredients: ["onions", "milk", "flour", "salt"],
+        ingredients: [{ value: 100, unit: "grams", ingredient: "apples" }],
         selected: false,
       },
     ],
@@ -43,29 +55,16 @@ class App extends Component {
 
   handleSelected = (recipe) => {
     const list = this.state.ingredients.concat(recipe.ingredients);
-    console.log(list);
     this.setState({ ingredients: list });
     const oldPlan = this.state.plan;
     const plan = oldPlan.concat(recipe);
     this.setState({ plan: plan });
   };
 
-  handlePurchased = (props) => {
-    console.log(props);
+  handleClicked = (item) => {
+    console.log(item);
+    //change class to change color,
   };
-  // handleSelected = (recipe) => {
-  //   const selectedId = recipe.id;
-  //   const recipes = this.state.recipes;
-  //   const filter = this.state.recipes.filter((r) => r.id === selectedId);
-  //   const selected = filter[0];
-
-  //   selected.selected = true;
-
-  //   const index = recipes.indexOf(selected);
-  //   this.setState((recipes[index]: selected));
-  //   console.log(this.state.plan);
-  //   //props of selected updates successfully, needs to be stored somehow
-  // };
 
   render() {
     return (
@@ -79,14 +78,12 @@ class App extends Component {
               onSelected={this.handleSelected}
             />
             <WeeklyPlan
-              //plan={this.state.recipes.filter((r) => r.selected === true)}
               //for adding to array, issue with key duplicates
               plan={this.state.plan}
             />
             <ShoppíngList
-              //when items added, child element is array, not individual
               ingredients={this.state.ingredients}
-              onPurchased={this.handlePurchased}
+              onClicked={this.handleClicked}
             />
           </div>
           <Navbar username={this.state.username} />

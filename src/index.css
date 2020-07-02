@@ -13,6 +13,15 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+.profile-pic {
+  margin: 10px;
+}
+
+img.profile-pic {
+  border-radius: 50%;
+}
+
 .page {
   width: 95%;
   display: flex;
@@ -129,6 +138,7 @@ li {
 
 .fas fa-shopping-cart {
   cursor: pointer;
+  pointer-events: none;
 }
 
 .shopping-icon {

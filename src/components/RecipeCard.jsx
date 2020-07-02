@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
 class RecipeCard extends Component {
-  getCardClasses() {
+  getCardClasses = () => {
     let classes = "";
     classes += this.props.selected === true ? "recipe-selected" : "recipe-card";
     //doesn't work... not re-rendered
     return classes;
-  }
+  };
 
   render() {
     return (
