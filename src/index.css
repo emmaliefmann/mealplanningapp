@@ -110,3 +110,29 @@ button:hover {
   color: #ffffff;
   background-color: #120b1e;
 }
+
+/*Shopping list*/
+
+li {
+  list-style: none;
+  flex: 1;
+}
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: solid yellow 2px;
+  padding: 1em;
+  margin: 0.5em;
+  width: 450px;
+}
+
+.fas fa-shopping-cart {
+  cursor: pointer;
+}
+
+.shopping-icon {
+  padding: 0.5em;
+  cursor: pointer;
+  background-color: grey;
+}
