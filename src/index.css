@@ -14,11 +14,18 @@ body {
   align-items: center;
 }
 
+.align {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .profile-pic {
   margin: 10px;
 }
 
-img.profile-pic {
+.profile-pic img {
   border-radius: 50%;
 }
 
@@ -63,7 +70,7 @@ main {
 }
 
 .full-container {
-  width: 90%;
+  width: 100%;
 }
 .recipe-container {
   width: 100%;
@@ -73,7 +80,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 60px;
+  min-height: 100px;
   background-color: palevioletred;
 }
 
@@ -96,7 +103,8 @@ h2 {
   font-family: "Roboto Slab", serif;
 }
 
-button {
+button,
+.button {
   display: inline-block;
   padding: 0.35em 1.2em;
   color: #120b1e;
@@ -115,7 +123,8 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button:hover,
+.button:hover {
   color: #ffffff;
   background-color: #120b1e;
 }
@@ -145,4 +154,46 @@ li {
   padding: 0.5em;
   cursor: pointer;
   background-color: grey;
+}
+
+/* Add recipe */
+.add-recipe-method {
+  resize: none;
+  width: 100%;
+  font-family: roboto;
+  height: 250px;
+}
+.error-message {
+  color: red;
+  font-size: 0.75em;
+  text-align: right;
+  width: 100%;
+}
+.ingredient-input {
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  position: relative;
+}
+form {
+  width: 60%;
+}
+.add-recipe-container {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+}
+
+.number-input {
+  max-width: 60px;
+}
+
+.ingredient-text-input {
+  width: 240px;
+}
+
+input {
+  padding: 5px;
 }

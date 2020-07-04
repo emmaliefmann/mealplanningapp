@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Title from "./components/Title";
 import WeeklyPlan from "./components/WeeklyPlan";
 import ShoppíngList from "./components/ShoppingList";
+import AddRecipe from "./components/AddRecipe";
 
 class App extends Component {
   state = {
@@ -20,6 +21,7 @@ class App extends Component {
           { value: 400, unit: "grams", ingredient: "pasta" },
         ],
         selected: false,
+        category: "main dish",
       },
       {
         id: 2,
@@ -29,6 +31,7 @@ class App extends Component {
           { value: 5, unit: "grams", ingredient: "carrots" },
         ],
         selected: false,
+        category: "side dish",
       },
       {
         id: 3,
@@ -41,12 +44,14 @@ class App extends Component {
           { value: 5, unit: "grams", ingredient: "turnip" },
         ],
         selected: false,
+        category: "desert",
       },
       {
         id: 4,
         title: "Recipe4",
         ingredients: [{ value: 100, unit: "grams", ingredient: "apples" }],
         selected: false,
+        category: "baking",
       },
     ],
     plan: [],
@@ -72,6 +77,7 @@ class App extends Component {
         <Title />
         <main>
           <div className="page">
+            <AddRecipe props={this.state.recipes} />
             <Recipes
               recipes={this.state.recipes}
               plan={false}
