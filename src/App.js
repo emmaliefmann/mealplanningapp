@@ -1,17 +1,24 @@
 import React, { Component } from "react";
 // when just react, when component??
 
-import Recipes from "./components/Recipes";
+//import Recipes from "./components/Recipes";
+import Pagination from "./components/Pagination";
+import RecipeCard from "./components/RecipeCard";
 import Navbar from "./components/Navbar";
 import Title from "./components/Title";
 import WeeklyPlan from "./components/WeeklyPlan";
 import ShoppíngList from "./components/ShoppingList";
 import AddRecipe from "./components/AddRecipe";
 
+//for pagination algorithm
+import { paginate } from "./utils/paginate";
+
 class App extends Component {
   state = {
     //profile object, default avatar pic if no photo chosen
     username: "Emma Liefmann",
+    currentPage: 1,
+    pageSize: 2,
     recipes: [
       {
         id: 1,
@@ -20,7 +27,6 @@ class App extends Component {
           { value: 100, unit: "grams", ingredient: "apples" },
           { value: 400, unit: "grams", ingredient: "pasta" },
         ],
-        selected: false,
         category: "main dish",
       },
       {
@@ -30,7 +36,6 @@ class App extends Component {
           { value: 90, unit: "grams", ingredient: "courgette" },
           { value: 5, unit: "grams", ingredient: "carrots" },
         ],
-        selected: false,
         category: "side dish",
       },
       {
@@ -43,15 +48,31 @@ class App extends Component {
           { value: 90, unit: "grams", ingredient: "onions" },
           { value: 5, unit: "grams", ingredient: "turnip" },
         ],
-        selected: false,
         category: "desert",
       },
       {
         id: 4,
         title: "Recipe4",
         ingredients: [{ value: 100, unit: "grams", ingredient: "apples" }],
-        selected: false,
         category: "baking",
+      },
+      {
+        id: 5,
+        title: "Recipe5",
+        ingredients: [
+          { value: 290, unit: "tablespoons", ingredient: "courgette" },
+          { value: 53, unit: "grams", ingredient: "caramel" },
+        ],
+        category: "side dish",
+      },
+      {
+        id: 6,
+        title: "Recipe6",
+        ingredients: [
+          { value: 300, unit: "grams", ingredient: "potato" },
+          { value: 50, unit: "grams", ingredient: "cream" },
+        ],
+        category: "side dish",
       },
     ],
     plan: [],
@@ -71,18 +92,45 @@ class App extends Component {
     //change class to change color,
   };
 
+  handlePageChange = (page) => {
+    this.setState({ currentPage: page });
+    console.log(this.state.currentPage);
+  };
+
+  //<AddRecipe props={this.state.recipes} />
   render() {
+    const { recipes: allRecipes } = this.state;
+    const recipes = paginate(
+      this.state.recipes,
+      this.state.currentPage,
+      this.state.pageSize
+    );
+    console.log(recipes);
+
     return (
       <div className="App">
         <Title />
         <main>
           <div className="page">
-            <AddRecipe props={this.state.recipes} />
-            <Recipes
-              recipes={this.state.recipes}
-              plan={false}
-              onSelected={this.handleSelected}
-            />
+            <div className="full-container">
+              <h2>Recipe Library</h2>
+              <div className="library-container">
+                {recipes.map((recipe) => (
+                  <RecipeCard
+                    key={recipe.id}
+                    title={recipe.title}
+                    id={recipe.id}
+                    ingredients={recipe.ingredients}
+                  />
+                ))}
+              </div>
+              <Pagination
+                count={this.state.recipes.length}
+                pageSize={this.state.pageSize}
+                onPageChange={this.handlePageChange}
+                currentPage={this.state.currentPage}
+              />
+            </div>
             <WeeklyPlan
               //for adding to array, issue with key duplicates
               plan={this.state.plan}

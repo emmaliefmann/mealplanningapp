@@ -1,7 +1,14 @@
 import React, { Component } from "react";
+
 import RecipeCard from "./RecipeCard";
+import Pagination from "./Pagination";
 
 class Recipes extends Component {
+  handlePageChange = (page) => {
+    this.props.currentPage = page;
+    console.log(this.props.currentPage);
+  };
+
   render() {
     return (
       <div className="full-container">
@@ -13,11 +20,15 @@ class Recipes extends Component {
               title={recipe.title}
               id={recipe.id}
               ingredients={recipe.ingredients}
-              onSelected={this.props.onSelected}
-              plan={false}
             />
           ))}
         </div>
+        <Pagination
+          count={this.props.recipes.length}
+          pageSize={2}
+          onPageChange={this.handlePageChange}
+          currentPage={1}
+        />
       </div>
     );
   }

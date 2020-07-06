@@ -9,6 +9,7 @@ class RecipeCard extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div className={this.getCardClasses()}>
         <h2>{this.props.title}</h2>

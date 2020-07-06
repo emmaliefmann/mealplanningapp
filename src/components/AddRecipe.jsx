@@ -1,9 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
+import IngredientField from "./IngredientField";
+
 //store categories as a const? map in order to push to array?
-//ingredients' name should be objects in array
-//https://github.com/react-hook-form/react-hook-form/blob/master/examples/FieldArray.tsx with autoincrement for index
+//Autoincrement for index on ingredients?
+//Ingredients is returned in an array, needs to be an object
+
 export default function AddRecipe(props) {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
@@ -14,7 +17,7 @@ export default function AddRecipe(props) {
       <h2>Add new Recipe</h2>
       <div className="align">
         <form action="" onSubmit={handleSubmit(onSubmit)}>
-          <div className="ingredient-input">
+          <div className="recipe-input">
             <label htmlFor="title">Title</label>
             <input
               ref={register({ required: true })}
@@ -26,7 +29,7 @@ export default function AddRecipe(props) {
               {errors.title && <p>Please choose a title</p>}
             </div>
           </div>
-          <div className="ingredient-input">
+          <div className="recipe-input">
             <label htmlFor="categories">Category:</label>
             <select
               htmlFor="categories"
@@ -43,7 +46,7 @@ export default function AddRecipe(props) {
               {errors.category && <p>Please choose a category</p>}
             </div>
           </div>
-          <div className="ingredient-input">
+          <div className="recipe-input">
             <label htmlFor="prep-time">Preparation time</label>
             <input
               ref={register({ required: true })}
@@ -59,56 +62,9 @@ export default function AddRecipe(props) {
           </div>
 
           <p>ingredients</p>
-          <div className="ingredient-input">
-            <input
-              ref={register({ required: true })}
-              type="number"
-              min="0"
-              className="number-input"
-              name="ingredient1[0]"
-            />
-            <select
-              name=""
-              id=""
-              ref={register({ required: true })}
-              name="ingredient1[1]"
-            >
-              <option value="grams">Grams</option>
-              <option value="tablespoons">tablespoons</option>
-              <option value="teaspoons">teaspoons</option>
-            </select>
-            <input
-              ref={register({ required: true })}
-              type="text"
-              className="ingredient-text-input"
-              name="ingredient1[2]"
-            />
-          </div>
-          <div className="ingredient-input">
-            <input
-              ref={register({ required: true })}
-              type="number"
-              min="0"
-              className="number-input"
-              name="ingredient2[0]"
-            />
-            <select
-              name=""
-              id=""
-              ref={register({ required: true })}
-              name="ingredient2[1]"
-            >
-              <option value="grams">Grams</option>
-              <option value="tablespoons">tablespoons</option>
-              <option value="teaspoons">teaspoons</option>
-            </select>
-            <input
-              ref={register}
-              type="text"
-              className="ingredient-text-input"
-              name="ingredient2[2]"
-            />
-          </div>
+          <IngredientField index={0} key={0} />
+          <IngredientField index={1} key={1} />
+          <IngredientField index={2} key={2} />
           <div>
             <button>+</button>
             <button>-</button>
