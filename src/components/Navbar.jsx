@@ -1,13 +1,11 @@
 import React from "react";
 
-//thoughts====
-//img src link from state
-const Navbar = ({ username }) => {
+const Navbar = ({ username, photo }) => {
   return (
     <div className="navbar">
       <div className="profile">
         <div className="profile-pic">
-          <img src="https://picsum.photos/100" alt="profile pic" />
+          <img src={`${photo}`} alt="profile pic" />
         </div>
 
         <h4>{username}</h4>

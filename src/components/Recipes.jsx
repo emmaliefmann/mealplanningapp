@@ -4,11 +4,6 @@ import RecipeCard from "./RecipeCard";
 import Pagination from "./Pagination";
 
 class Recipes extends Component {
-  handlePageChange = (page) => {
-    this.props.currentPage = page;
-    console.log(this.props.currentPage);
-  };
-
   render() {
     return (
       <div className="full-container">

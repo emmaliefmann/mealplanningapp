@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 //name needs to change dynamically depending on index
+//how to join variable with string e.g. {title}+[0]?
+
 const IngredientField = (props) => {
   const index = props.index;
   const ingredient = "ingredient";
@@ -16,7 +18,7 @@ const IngredientField = (props) => {
         type="number"
         min="0"
         className="number-input"
-        name={title}
+        name={{ title }}
       />
       <select
         name=""

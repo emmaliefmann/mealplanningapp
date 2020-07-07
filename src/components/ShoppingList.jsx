@@ -10,6 +10,7 @@ class ShoppíngList extends Component {
           <ul>
             {this.props.ingredients.map((ingredient) => (
               <ShoppingItem
+                key={ingredient.index}
                 ingredient={ingredient.ingredient}
                 unit={ingredient.unit}
                 value={ingredient.value}

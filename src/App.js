@@ -15,8 +15,7 @@ import { paginate } from "./utils/paginate";
 
 class App extends Component {
   state = {
-    //profile object, default avatar pic if no photo chosen
-    username: "Emma Liefmann",
+    profile: { username: "Emma Liefmann", photo: "https://picsum.photos/100" },
     currentPage: 1,
     pageSize: 2,
     recipes: [
@@ -63,7 +62,7 @@ class App extends Component {
           { value: 290, unit: "tablespoons", ingredient: "courgette" },
           { value: 53, unit: "grams", ingredient: "caramel" },
         ],
-        category: "side dish",
+        category: "other",
       },
       {
         id: 6,
@@ -72,11 +71,12 @@ class App extends Component {
           { value: 300, unit: "grams", ingredient: "potato" },
           { value: 50, unit: "grams", ingredient: "cream" },
         ],
-        category: "side dish",
+        category: "vegetarian",
       },
     ],
     plan: [],
     ingredients: [],
+    ingredientNumber: 5,
   };
 
   handleSelected = (recipe) => {
@@ -94,24 +94,27 @@ class App extends Component {
 
   handlePageChange = (page) => {
     this.setState({ currentPage: page });
-    console.log(this.state.currentPage);
   };
 
-  //<AddRecipe props={this.state.recipes} />
   render() {
     const { recipes: allRecipes } = this.state;
     const recipes = paginate(
-      this.state.recipes,
+      allRecipes,
       this.state.currentPage,
       this.state.pageSize
     );
-    console.log(recipes);
 
+    const { username, photo } = this.state.profile;
     return (
       <div className="App">
         <Title />
         <main>
           <div className="page">
+            <AddRecipe
+              props={this.state.recipes}
+              ingredientNumber={5}
+              categories={this.state.recipes.category}
+            />
             <div className="full-container">
               <h2>Recipe Library</h2>
               <div className="library-container">
@@ -121,6 +124,7 @@ class App extends Component {
                     title={recipe.title}
                     id={recipe.id}
                     ingredients={recipe.ingredients}
+                    onSelected={this.handleSelected}
                   />
                 ))}
               </div>
@@ -131,16 +135,24 @@ class App extends Component {
                 currentPage={this.state.currentPage}
               />
             </div>
-            <WeeklyPlan
-              //for adding to array, issue with key duplicates
-              plan={this.state.plan}
-            />
+            <div>
+              <h2>Weekly plan</h2>
+              <div className="library-container">
+                {this.state.plan.map((plan) => (
+                  <RecipeCard
+                    key={plan.index}
+                    title={plan.title}
+                    ingredients={plan.ingredients}
+                  />
+                ))}
+              </div>
+            </div>
             <ShoppíngList
               ingredients={this.state.ingredients}
               onClicked={this.handleClicked}
             />
           </div>
-          <Navbar username={this.state.username} />
+          <Navbar username={username} photo={photo} />
         </main>
       </div>
     );

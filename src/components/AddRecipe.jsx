@@ -3,15 +3,14 @@ import { useForm } from "react-hook-form";
 
 import IngredientField from "./IngredientField";
 
-//store categories as a const? map in order to push to array?
-//Autoincrement for index on ingredients?
-//Ingredients is returned in an array, needs to be an object
+//add new
 
 export default function AddRecipe(props) {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
     console.log(data);
   };
+  const value = 4;
   return (
     <div>
       <h2>Add new Recipe</h2>
@@ -39,7 +38,9 @@ export default function AddRecipe(props) {
             >
               <option value=""></option>
               {props.props.map(({ category }) => (
-                <option value={category}>{category} </option>
+                <option key={category} value={category}>
+                  {category}{" "}
+                </option>
               ))}
             </select>
             <div className="error-message">
@@ -60,11 +61,12 @@ export default function AddRecipe(props) {
               {errors.preptime && <p>Please enter prep time</p>}
             </div>
           </div>
-
           <p>ingredients</p>
-          <IngredientField index={0} key={0} />
-          <IngredientField index={1} key={1} />
-          <IngredientField index={2} key={2} />
+          {Array(value)
+            .fill(0)
+            .map((element) => (
+              <IngredientField />
+            ))}
           <div>
             <button>+</button>
             <button>-</button>
