@@ -14,6 +14,15 @@ body {
   align-items: center;
 }
 
+.navlink {
+  text-decoration: none;
+  color: black;
+  padding: 15px;
+}
+
+.active {
+  text-decoration: underline;
+}
 .align {
   display: flex;
   flex-direction: column;
@@ -64,11 +73,11 @@ body {
   margin: 10px;
   height: 240px;
 }
-main {
+
+.new-container {
   display: flex;
   justify-content: space-between;
 }
-
 .full-container {
   width: 100%;
   display: flex;
@@ -226,7 +235,7 @@ input {
   text-align: center;
 }
 
-.active {
+.active-pagination {
   background-color: grey;
 }
 

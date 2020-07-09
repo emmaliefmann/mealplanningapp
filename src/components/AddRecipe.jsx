@@ -37,7 +37,7 @@ export default function AddRecipe(props) {
               ref={register({ required: true })}
             >
               <option value=""></option>
-              {props.props.map(({ category }) => (
+              {props.recipes.map(({ category }) => (
                 <option key={category} value={category}>
                   {category}{" "}
                 </option>

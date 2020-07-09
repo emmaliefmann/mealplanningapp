@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// when just react, when component??
+import { Route, Switch, Redirect } from "react-router-dom";
 
 //import Recipes from "./components/Recipes";
 import Pagination from "./components/Pagination";
@@ -9,6 +9,7 @@ import Title from "./components/Title";
 import WeeklyPlan from "./components/WeeklyPlan";
 import ShoppíngList from "./components/ShoppingList";
 import AddRecipe from "./components/AddRecipe";
+import NotFound from "./components/NotFound";
 
 //for pagination algorithm
 import { paginate } from "./utils/paginate";
@@ -97,9 +98,8 @@ class App extends Component {
   };
 
   render() {
-    const { recipes: allRecipes } = this.state;
     const recipes = paginate(
-      allRecipes,
+      this.state.recipes,
       this.state.currentPage,
       this.state.pageSize
     );
@@ -108,52 +108,44 @@ class App extends Component {
     return (
       <div className="App">
         <Title />
-        <main>
-          <div className="page">
-            <AddRecipe
-              props={this.state.recipes}
-              ingredientNumber={5}
-              categories={this.state.recipes.category}
-            />
-            <div className="full-container">
-              <h2>Recipe Library</h2>
-              <div className="library-container">
-                {recipes.map((recipe) => (
-                  <RecipeCard
-                    key={recipe.id}
-                    title={recipe.title}
-                    id={recipe.id}
-                    ingredients={recipe.ingredients}
-                    onSelected={this.handleSelected}
+        <div className="new-container">
+          <main className="page">
+            <Switch>
+              <Route
+                path="/addrecipe"
+                render={(props) => (
+                  <AddRecipe
+                    recipes={this.state.recipes}
+                    ingredientNumber={5}
+                    categories={this.state.recipes.category}
+                    {...props}
                   />
-                ))}
-              </div>
-              <Pagination
-                count={this.state.recipes.length}
-                pageSize={this.state.pageSize}
-                onPageChange={this.handlePageChange}
-                currentPage={this.state.currentPage}
+                )}
               />
-            </div>
-            <div>
-              <h2>Weekly plan</h2>
-              <div className="library-container">
-                {this.state.plan.map((plan) => (
-                  <RecipeCard
-                    key={plan.index}
-                    title={plan.title}
-                    ingredients={plan.ingredients}
+              <Route
+                path="/weeklyPlan"
+                render={(props) => (
+                  <WeeklyPlan plan={this.state.plan} {...props} />
+                )}
+              />
+              <Route
+                path="/shoppinglist"
+                render={(props) => (
+                  <ShoppíngList
+                    ingredients={this.state.ingredients}
+                    onClicked={this.handleClicked}
+                    {...props}
                   />
-                ))}
-              </div>
-            </div>
-            <ShoppíngList
-              ingredients={this.state.ingredients}
-              onClicked={this.handleClicked}
-            />
-          </div>
+                )}
+              />
+              <Route path="/library" component=""></Route>
+              <Route path="/not-found" component={NotFound}></Route>
+              <Redirect from="/" exact to="/library"></Redirect>
+              <Redirect to="/not-found"></Redirect>
+            </Switch>
+          </main>
           <Navbar username={username} photo={photo} />
-        </main>
+        </div>
       </div>
     );
   }
